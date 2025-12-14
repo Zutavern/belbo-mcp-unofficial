@@ -11,6 +11,20 @@ A robust Model Context Protocol (MCP) server for the [Belbo Booking API](https:/
 
 ---
 
+## 🔌 Quick Install
+
+Install the Belbo MCP Server with one click:
+
+[![Install in Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](cursor://anysphere.cursor-deeplink/mcp/install?name=belbo&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJiZWxiby1tY3Atc2VydmVyIl19)
+
+[![Install in VS Code](https://img.shields.io/badge/VS_Code-Install_Server-0098FF?style=for-the-badge&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=belbo&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22belbo-mcp-server%22%5D%7D)
+
+For **Claude Desktop**, see the [Configuration section](#for-claude-desktop) below.
+
+> **Note**: After installation, you'll need to configure your Belbo credentials (business name and API token) - see [Configuration](#️-configuration).
+
+---
+
 ## ✨ Features
 
 - **Full Belbo API Coverage**: Appointments, Customers, Services, Employees, Availability, Opening Hours, and Transactions
