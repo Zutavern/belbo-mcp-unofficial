@@ -1,51 +1,32 @@
 # Belbo MCP Server
 
+[![npm version](https://img.shields.io/npm/v/belbo-mcp-server.svg)](https://www.npmjs.com/package/belbo-mcp-server)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![MCP](https://img.shields.io/badge/MCP-Compatible-blue.svg)](https://modelcontextprotocol.io/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+
 A robust Model Context Protocol (MCP) server for the [Belbo Booking API](https://belbo.com). Enables AI assistants like **Claude**, **Cursor**, and other MCP-compatible tools to interact with Belbo calendar and booking systems.
 
-## Features
+---
 
-- **Full Belbo API Coverage**: Appointments, Customers, Services, Employees, Availability, Opening Hours, and Transactions
-- **Secure Token Authentication**: API token is stored securely and never exposed in logs
-- **One-Click Installation**: Easy setup for Claude Desktop and Cursor
-- **Robust Error Handling**: Comprehensive error messages with helpful hints
-- **TypeScript**: Fully typed for reliability and maintainability
+## Quick Installation
 
-## Quick Start
+Choose your preferred AI assistant for one-click installation:
 
-### Prerequisites
+### Install in Cursor
 
-- Node.js 18 or higher
-- A Belbo account with API access enabled
-- Your Belbo API token (found in Settings > API Access)
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=belbo&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJiZWxiby1tY3Atc2VydmVyIl0sImVudiI6eyJCRUxCT19CVVNJTkVTUyI6InlvdXItYnVzaW5lc3MtbmFtZSIsIkJFTEJPX1RPS0VOIjoieW91ci1hcGktdG9rZW4ifX0%3D)
 
-### Installation
+> Click the button above to install directly in Cursor. You'll need to update the environment variables with your actual Belbo credentials after installation.
 
-#### Option 1: NPX (Recommended)
-
-No installation required! Just configure your AI assistant to use:
+### Install in VS Code
 
 ```bash
-npx belbo-mcp-server
+# Run this command in VS Code terminal
+code --add-mcp '{"name":"belbo","command":"npx","args":["belbo-mcp-server"],"env":{"BELBO_BUSINESS":"your-business-name","BELBO_TOKEN":"your-api-token"}}'
 ```
 
-#### Option 2: Global Install
-
-```bash
-npm install -g belbo-mcp-server
-```
-
-#### Option 3: From Source
-
-```bash
-git clone https://github.com/your-username/belbo-mcp-unofficial.git
-cd belbo-mcp-unofficial
-npm install
-npm run build
-```
-
-## Configuration
-
-### For Claude Desktop
+### Install in Claude Desktop
 
 Add to your Claude Desktop configuration file:
 
@@ -67,7 +48,76 @@ Add to your Claude Desktop configuration file:
 }
 ```
 
-**Or configure at runtime** (no env variables needed):
+---
+
+## Features
+
+- **Full Belbo API Coverage**: Appointments, Customers, Services, Employees, Availability, Opening Hours, and Transactions
+- **Secure Token Authentication**: API token is stored securely and never exposed in logs
+- **One-Click Installation**: Easy setup for Claude Desktop, Cursor, and VS Code
+- **Runtime Configuration**: Configure credentials via tool call if not set via environment
+- **Robust Error Handling**: Comprehensive error messages with helpful hints
+- **TypeScript**: Fully typed for reliability and maintainability
+
+---
+
+## Prerequisites
+
+Before you start, make sure you have:
+
+1. **Node.js 18 or higher** - [Download here](https://nodejs.org/)
+2. **A Belbo account** with API access enabled
+3. **Your Belbo API token** - See [Getting Your API Token](#getting-your-api-token)
+
+---
+
+## Installation Options
+
+### Option 1: NPX (Recommended)
+
+No installation required! The MCP server runs directly via npx:
+
+```bash
+npx belbo-mcp-server
+```
+
+### Option 2: Global Install
+
+```bash
+npm install -g belbo-mcp-server
+```
+
+Then run with:
+```bash
+belbo-mcp-server
+```
+
+### Option 3: From Source
+
+```bash
+git clone https://github.com/Zutavern/belbo-mcp-unofficial.git
+cd belbo-mcp-unofficial
+npm install
+npm run build
+npm start
+```
+
+---
+
+## Configuration
+
+### Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `BELBO_BUSINESS` | Your Belbo subdomain (e.g., `demo` for `demo.belbo.com`) | Optional* |
+| `BELBO_TOKEN` | Your Belbo API token | Optional* |
+
+*\*If not set via environment, use the `belbo_configure` tool at runtime.*
+
+### Runtime Configuration (Alternative)
+
+If you prefer not to set environment variables, you can configure the connection in your first message:
 
 ```json
 {
@@ -80,49 +130,26 @@ Add to your Claude Desktop configuration file:
 }
 ```
 
-Then use the `belbo_configure` tool in your first message:
+Then tell your AI assistant:
 > "Configure Belbo with business 'mysalon' and token 'abc123'"
 
-### For Cursor
-
-Add to your Cursor MCP settings (`.cursor/mcp.json`):
-
-```json
-{
-  "mcpServers": {
-    "belbo": {
-      "command": "npx",
-      "args": ["belbo-mcp-server"],
-      "env": {
-        "BELBO_BUSINESS": "your-business-name",
-        "BELBO_TOKEN": "your-api-token"
-      }
-    }
-  }
-}
-```
-
-### Environment Variables
-
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `BELBO_BUSINESS` | Your Belbo subdomain (e.g., `demo` for `demo.belbo.com`) | Optional* |
-| `BELBO_TOKEN` | Your Belbo API token | Optional* |
-
-*If not set via environment, use `belbo_configure` tool at runtime.
+---
 
 ## Getting Your API Token
 
-1. Log in to your Belbo account
-2. Go to **Settings** > **API Access**
-3. If not visible, enable it via **Settings** > **Add Function**
-4. Create a new API access and copy the token
+1. Log in to your Belbo account at `https://YOUR-BUSINESS.belbo.com`
+2. Go to **Settings** → **API Access**
+3. If the option is not visible, enable it via **Settings** → **Add Function** → **API Access**
+4. Click **Create New API Access**
+5. Copy the generated token
 
-Your Belbo URL: `https://YOUR-BUSINESS.belbo.com`
+> **Important**: Store your API token securely. Never commit it to version control or share it publicly.
+
+---
 
 ## Available Tools
 
-### Configuration
+### Configuration Tools
 
 | Tool | Description |
 |------|-------------|
@@ -130,7 +157,7 @@ Your Belbo URL: `https://YOUR-BUSINESS.belbo.com`
 | `belbo_test_connection` | Test if the API connection is working |
 | `belbo_get_config_status` | Check current configuration status |
 
-### Appointments
+### Appointment Management
 
 | Tool | Description |
 |------|-------------|
@@ -140,7 +167,7 @@ Your Belbo URL: `https://YOUR-BUSINESS.belbo.com`
 | `belbo_update_appointment` | Update an existing appointment |
 | `belbo_delete_appointment` | Delete/cancel an appointment |
 
-### Customers
+### Customer Management
 
 | Tool | Description |
 |------|-------------|
@@ -151,30 +178,20 @@ Your Belbo URL: `https://YOUR-BUSINESS.belbo.com`
 | `belbo_update_customer` | Update customer information |
 | `belbo_delete_customer` | Delete a customer |
 
-### Services
+### Services & Employees
 
 | Tool | Description |
 |------|-------------|
 | `belbo_get_services` | Get all available services/treatments |
 | `belbo_get_service` | Get a specific service by ID |
-
-### Employees
-
-| Tool | Description |
-|------|-------------|
 | `belbo_get_employees` | Get all employees/staff members |
 | `belbo_get_employee` | Get a specific employee by ID |
 
-### Availability
+### Availability & Scheduling
 
 | Tool | Description |
 |------|-------------|
 | `belbo_get_availability` | Get available time slots for booking |
-
-### Business Info
-
-| Tool | Description |
-|------|-------------|
 | `belbo_get_opening_hours` | Get business opening hours |
 
 ### Transactions
@@ -184,56 +201,88 @@ Your Belbo URL: `https://YOUR-BUSINESS.belbo.com`
 | `belbo_get_transactions` | Get transactions/cash register entries |
 | `belbo_get_transaction` | Get a specific transaction by ID |
 
+---
+
 ## Usage Examples
 
-### With Claude
+Once configured, you can interact with Belbo using natural language:
 
-Once configured, you can ask Claude things like:
+### Viewing Appointments
 
-- *"Show me all appointments for today"*
-- *"Find customer Max Mustermann"*
-- *"What services are available?"*
-- *"Book an appointment for tomorrow at 10:00 for haircut with employee ID xyz"*
-- *"Show available time slots for next Monday"*
-- *"Get the opening hours"*
-- *"Show all transactions from last week"*
+> "Show me all appointments for today"
 
-### Example Conversation
+> "What appointments are scheduled for next Monday?"
 
-**You**: Configure Belbo with business 'mysalon' and token 'abc123xyz'
+> "Show me appointments for employee Maria this week"
 
-**Claude**: Successfully configured and connected to mysalon.belbo.com
+### Managing Customers
 
-**You**: Show me tomorrow's appointments
+> "Find customer Max Mustermann"
 
-**Claude**: *Uses belbo_get_appointments with tomorrow's date*
+> "Search for customers with email @gmail.com"
 
-## Date Format
+> "Create a new customer: Anna Schmidt, phone 0171-1234567"
 
-All dates use the format **DD.MM.YYYY** (German format), e.g.:
-- `25.12.2024` for December 25, 2024
-- `01.01.2025` for January 1, 2025
+### Booking Appointments
 
-Times use **HH:MM** format (24-hour), e.g.:
-- `09:00` for 9 AM
-- `14:30` for 2:30 PM
+> "What time slots are available tomorrow?"
+
+> "Book an appointment for haircut tomorrow at 10:00 for customer ID 123"
+
+> "Show available slots for service ID 456 next week"
+
+### Business Information
+
+> "What are the opening hours?"
+
+> "List all available services"
+
+> "Show me all employees"
+
+### Transactions
+
+> "Show all transactions from last week"
+
+> "Get today's cash register entries"
+
+---
+
+## Date and Time Formats
+
+All dates use **German format** (DD.MM.YYYY):
+- `25.12.2024` → December 25, 2024
+- `01.01.2025` → January 1, 2025
+
+Times use **24-hour format** (HH:MM):
+- `09:00` → 9:00 AM
+- `14:30` → 2:30 PM
+
+---
 
 ## Error Handling
 
 The server provides detailed error messages:
 
-- **Not configured**: Prompts to use `belbo_configure`
-- **Authentication failed**: Hints to check API token
-- **Network errors**: Includes status codes and endpoints
-- **Invalid parameters**: Shows which parameters are missing/invalid
+| Error | Cause | Solution |
+|-------|-------|----------|
+| "Not configured" | Missing API credentials | Use `belbo_configure` or set environment variables |
+| "Authentication failed" | Invalid API token | Check your API token in Belbo settings |
+| "Business not found" | Invalid business subdomain | Verify your Belbo URL |
+| "Network error" | Connection issues | Check internet connection and Belbo service status |
+
+---
 
 ## Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/Zutavern/belbo-mcp-unofficial.git
+cd belbo-mcp-unofficial
+
 # Install dependencies
 npm install
 
-# Run in development mode
+# Run in development mode (with hot reload)
 npm run dev
 
 # Build for production
@@ -243,55 +292,92 @@ npm run build
 npm start
 ```
 
-## Security Notes
+---
 
-- API tokens are never logged or exposed in responses
-- Use environment variables for production deployments
-- Tokens are sent via HTTPS only
-- Consider using separate API tokens for different environments
+## Security Best Practices
+
+- **Never commit tokens**: Use environment variables or `.env` files (add to `.gitignore`)
+- **Use separate tokens**: Create different API tokens for development and production
+- **Rotate tokens regularly**: Regenerate API tokens periodically
+- **Monitor usage**: Check API access logs in Belbo settings
+
+---
 
 ## Troubleshooting
 
 ### "Not configured" Error
 
-Use `belbo_configure` with your business name and token, or set environment variables.
+**Problem**: The server doesn't have API credentials.
+
+**Solutions**:
+1. Set environment variables `BELBO_BUSINESS` and `BELBO_TOKEN`
+2. Or use the `belbo_configure` tool in your first message
 
 ### "Authentication failed" Error
 
-1. Check your API token is correct
-2. Verify API access is enabled in Belbo settings
-3. Ensure the token hasn't expired
+**Problem**: The API token is invalid or expired.
 
-### "Network error"
+**Solutions**:
+1. Verify your API token in Belbo Settings → API Access
+2. Generate a new token if needed
+3. Ensure API Access is enabled in your Belbo account
 
+### "Network error" Error
+
+**Problem**: Cannot connect to Belbo servers.
+
+**Solutions**:
 1. Check your internet connection
-2. Verify your business subdomain is correct
-3. Ensure Belbo services are operational
+2. Verify the business subdomain is correct
+3. Try accessing `https://YOUR-BUSINESS.belbo.com` in a browser
+
+### MCP Server Not Starting
+
+**Problem**: The server fails to initialize.
+
+**Solutions**:
+1. Ensure Node.js 18+ is installed: `node --version`
+2. Clear npm cache: `npm cache clean --force`
+3. Try reinstalling: `npm install -g belbo-mcp-server`
+
+---
 
 ## API Reference
 
-This server is based on the [Belbo REST API](https://hilfe.belbo.com/api-schnittstellen/). For detailed API documentation, see [Belbo API on Postman](https://documenter.getpostman.com/view/6150978/RzfmESXY).
+This server is built on the [Belbo REST API](https://hilfe.belbo.com/api-schnittstellen/). For detailed API documentation:
+
+- [Belbo API Help (German)](https://hilfe.belbo.com/api-schnittstellen/)
+- [Belbo REST-API on Postman](https://documenter.getpostman.com/view/6150978/RzfmESXY)
+- [MCP Protocol Specification](https://modelcontextprotocol.io/)
+
+---
 
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## Disclaimer
-
-This is an unofficial, community-maintained MCP server for the Belbo API. It is not affiliated with or endorsed by Belbo GmbH.
-
-## Support
-
-- **Issues**: [GitHub Issues](https://github.com/your-username/belbo-mcp-unofficial/issues)
-- **Belbo Support**: [info@belbo.com](mailto:info@belbo.com)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
-**Sources**:
-- [Belbo API Documentation](https://hilfe.belbo.com/api-schnittstellen/)
-- [Belbo REST-API on Postman](https://documenter.getpostman.com/view/6150978/RzfmESXY)
-- [MCP Protocol Specification](https://modelcontextprotocol.io/)
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## Disclaimer
+
+This is an **unofficial**, community-maintained MCP server for the Belbo API. It is not affiliated with or endorsed by Belbo GmbH.
+
+---
+
+## Support
+
+- **Issues**: [GitHub Issues](https://github.com/Zutavern/belbo-mcp-unofficial/issues)
+- **Belbo Support**: [info@belbo.com](mailto:info@belbo.com)
+- **Belbo Help Center**: [hilfe.belbo.com](https://hilfe.belbo.com/)
