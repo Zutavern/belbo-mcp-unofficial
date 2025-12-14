@@ -135,7 +135,7 @@ Then tell your AI assistant:
 
 ---
 
-## Getting Your API Token
+## 🔑 Getting Your API Token
 
 1. Log in to your Belbo account at `https://YOUR-BUSINESS.belbo.com`
 2. Go to **Settings** → **API Access**
@@ -147,7 +147,7 @@ Then tell your AI assistant:
 
 ---
 
-## Available Tools
+## 🛠️ Available Tools
 
 ### Configuration Tools
 
@@ -259,7 +259,7 @@ Times use **24-hour format** (HH:MM):
 
 ---
 
-## Error Handling
+## ⚠️ Error Handling
 
 The server provides detailed error messages:
 
@@ -272,7 +272,7 @@ The server provides detailed error messages:
 
 ---
 
-## Development
+## 👨‍💻 Development
 
 ```bash
 # Clone the repository
@@ -303,7 +303,7 @@ npm start
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 ### "Not configured" Error
 
@@ -342,7 +342,7 @@ npm start
 
 ---
 
-## API Reference
+## 📚 API Reference
 
 This server is built on the [Belbo REST API](https://hilfe.belbo.com/api-schnittstellen/). For detailed API documentation:
 
@@ -352,7 +352,7 @@ This server is built on the [Belbo REST API](https://hilfe.belbo.com/api-schnitt
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
@@ -370,13 +370,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## Disclaimer
+## ⚖️ Disclaimer
 
 This is an **unofficial**, community-maintained MCP server for the Belbo API. It is not affiliated with or endorsed by Belbo GmbH.
 
 ---
 
-## Support
+## 💡 Support
 
 - **Issues**: [GitHub Issues](https://github.com/Zutavern/belbo-mcp-unofficial/issues)
 - **Belbo Support**: [info@belbo.com](mailto:info@belbo.com)
