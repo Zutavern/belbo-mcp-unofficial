@@ -11,26 +11,13 @@ A robust Model Context Protocol (MCP) server for the [Belbo Booking API](https:/
 
 ## Quick Installation
 
-Choose your preferred AI assistant for one-click installation:
+Choose your preferred AI assistant for installation:
 
-### Install in Cursor
-
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=belbo&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJiZWxiby1tY3Atc2VydmVyIl0sImVudiI6eyJCRUxCT19CVVNJTkVTUyI6InlvdXItYnVzaW5lc3MtbmFtZSIsIkJFTEJPX1RPS0VOIjoieW91ci1hcGktdG9rZW4ifX0%3D)
-
-> Click the button above to install directly in Cursor. You'll need to update the environment variables with your actual Belbo credentials after installation.
-
-### Install in VS Code
-
-```bash
-# Run this command in VS Code terminal
-code --add-mcp '{"name":"belbo","command":"npx","args":["belbo-mcp-server"],"env":{"BELBO_BUSINESS":"your-business-name","BELBO_TOKEN":"your-api-token"}}'
-```
-
-### Install in Claude Desktop
+### Install in Claude Desktop (Recommended)
 
 Add to your Claude Desktop configuration file:
 
-**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
+**macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
@@ -46,6 +33,40 @@ Add to your Claude Desktop configuration file:
     }
   }
 }
+```
+
+> After adding the configuration, restart Claude Desktop to activate the Belbo MCP server.
+
+### Install in Claude Code (Cloud)
+
+For Claude Code in the cloud, configure the MCP server in your project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "belbo": {
+      "command": "npx",
+      "args": ["belbo-mcp-server"],
+      "env": {
+        "BELBO_BUSINESS": "your-business-name",
+        "BELBO_TOKEN": "your-api-token"
+      }
+    }
+  }
+}
+```
+
+### Install in Cursor
+
+[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/install-mcp?name=belbo&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyJiZWxiby1tY3Atc2VydmVyIl0sImVudiI6eyJCRUxCT19CVVNJTkVTUyI6InlvdXItYnVzaW5lc3MtbmFtZSIsIkJFTEJPX1RPS0VOIjoieW91ci1hcGktdG9rZW4ifX0%3D)
+
+> Click the button above to install directly in Cursor. You'll need to update the environment variables with your actual Belbo credentials after installation.
+
+### Install in VS Code
+
+```bash
+# Run this command in VS Code terminal
+code --add-mcp '{"name":"belbo","command":"npx","args":["belbo-mcp-server"],"env":{"BELBO_BUSINESS":"your-business-name","BELBO_TOKEN":"your-api-token"}}'
 ```
 
 ---
